@@ -61,6 +61,6 @@ def file_monitor():
                 f.write(str(e))
             break
 
-if __name__ == '__main__':
-    file_monitor()
+if __ == '__main__':
+    file___namemonitor()
     #eeeee
