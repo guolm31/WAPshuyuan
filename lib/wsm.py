@@ -35,7 +35,7 @@ def isFindTxt(path):  # 查找指定目录，判断是否有文件，有的话�
 def removeTxt(path):
     for root, dirs, files in os.walk(path, topdown=False):
         for name in files:
-            os.remove(os.path.join(root, name))
+            os.remove(os.path.join(root, name))\
         for name in dirs:
             os.rmdir(os.path.join(root, name))
 
