@@ -1,0 +1,159 @@
+https://www.runoob.com/git/git-branch.html
+
+进入Git Bash:
+ cd /e/python/GitRepo
+初始化仓库
+ git init            
+设置用户名，邮件
+ $ git config --global user.name "Guo liming"
+ $ git config --global user.email "18607181232@wo.cn"
+查看git config
+ $ git config --list
+
+ $ git config user.name
+Guo liming
+查看当前目录
+$ ls -al
+total 4
+drwxr-xr-x 1 pc 197121 0 八月   20 20:54 ./
+drwxr-xr-x 1 pc 197121 0 八月   20 20:56 ../
+drwxr-xr-x 1 pc 197121 0 八月   20 20:54 .git/
+
+$ pwd
+/e/python/GitRepo
+
+把文件纳入版本控制,通知git对文件进行跟踪：
+$git add *.c
+$git add readme
+
+提交：
+$git commit -m "commit description"
+
+查看版本控制文件情况：git status 以查看在你上次提交之后是否有修改。
+git status -s
+
+从仓库中拷贝项目：
+git clone  <repo> <directory>
+
+查看git提交历史：
+git log
+
+我们可以用 --oneline 选项来查看历史记录的简洁的版本。
+git log --oneline
+
+我们还可以用 --graph 选项，查看历史中什么时候出现了分支、合并。以下为相同的命令，开启了拓扑图选项：
+git log --graph
+
+如果只想查找指定用户的提交日志可以使用命令：git log --author 
+git log --author="Guo liming"
+
+如果你要指定日期，可以执行几个选项：--since 和 --before，但是你也可以用 --until 和 --after。 
+$ git log --oneline --before={3.weeks.ago} --after={2010-04-18}
+
+
+
+
+git hub:设置远程仓库
+github.com
+
+
+guolm31/WAPshuyuan
+
+1\生成ssh秘钥
+$ ssh-keygen -t rsa -C "18607181232@wo.cn"
+打开 id_rsa.pub，复制里面的 key。
+
+2、github，进入 Account => Settings（账户配置），左边选择 SSH and GPG keys，
+然后点击 New SSH key 按钮,title 设置标题GuolimingX230 ，粘贴在你电脑上生成的 key
+验证是否成功，输入以下命令：
+$ ssh -T git@github.com
+Hi guolm31! You've successfully authenticated, but GitHub does not provide shell access.
+
+可运行$  ssh -v git@github.com进行debug分析
+
+3、建立WAPshuyuan目录
+$ pwd
+/e/python/WAPshuyuan
+
+git init 初始化一下
+
+查看远程仓库
+$ git remote -v
+
+添加远程仓库
+$ git remote add origin1 git@github.com:guolm31/WAPshuyuan.git
+
+$ git remote -v
+origin1 git@github.com:guolm31/WAPshuyuan.git (fetch)
+origin1 git@github.com:guolm31/WAPshuyuan.git (push)
+
+从远程仓库下载分支数据：
+$ git fetch origin1
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (6/6), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (6/6), 1.20 KiB | 4.00 KiB/s, done.
+From github.com:guolm31/WAPshuyuan
+ * [new branch]      master     -> origin1/master
+
+将更新同步到本地：
+$ git merge origin1/master
+
+推送到远程仓库：
+$ pwd
+/e/python/WAPshuyuan
+
+$ touch test.txt
+
+$ ls
+README.md  test.txt
+
+$ git add test.txt
+
+$ git commit -m "add test.txt-20200820"
+[master 5de57aa] add test.txt-20200820
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 test.txt
+
+$ git push origin1 master
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 282 bytes | 141.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:guolm31/WAPshuyuan.git
+   ce861da..5de57aa  master -> master
+
+手动创建一个分支。执行 git branch (branchname) 即可。 
+git branch test1
+
+查看当前分支
+$ git branch
+* master
+  test1
+
+切换分支：
+$ ls
+README
+$ echo 'runoob.com' > test.txt
+$ git add .
+$ git commit -m 'add test.txt'
+[master 3e92c19] add test.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 test.txt
+$ ls
+README        test.txt
+$ git checkout testing
+Switched to branch 'testing'
+$ ls
+README
+
+当我们切换到 testing 分支的时候，我们添加的新文件 test.txt 被移除了。切换回 master 分支的时候，它们有重新出现了
+使用分支将工作切分开来，从而让我们能够在不同开发环境中做事，并来回切换。
+
+分支合并：
+一旦某分支有了独立内容，你终究会希望将它合并回到你的主分支。 
+你可以使用以下命令将任何分支合并到当前分支中去：
+https://www.w3cschool.cn/git/git-branch.html
