@@ -55,7 +55,7 @@ $ git log --oneline --before={3.weeks.ago} --after={2010-04-18}
 
 git hub:设置远程仓库
 github.com
-用户guolm31  密码guo197807  邮箱18607181232@wo.cn
+
 
 guolm31/WAPshuyuan
 
