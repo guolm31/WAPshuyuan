@@ -6,7 +6,7 @@
 
 import time
 import os
-from ftplib import FTP
+from ftplib import FTP  #加载ftp模块
 import zipfile, ftplib
 
 path = input('请输入文件目录路径')  #定期扫描日志目录中的文件r"C:\Users\Administrator\Desktop\log"
@@ -19,14 +19,15 @@ def isFindTxt(path):  # 查找指定目录，判断是否有文件，有的话�
         else:
             print('日志目录有文件,将文件ftp到服务器并备份到备份目录')
 
-            t = time.strftime('%Y-%m-%d', time.localtime(time.time()))
+            t = time.strftime('%Y-%m-%d', time.localtime(time.time()))     #接收时间元组，并返回以可读字符串表示的当地时间
             ftp = ftplib.FTP("ftp服务器IP")
-            ftp.login("用户名", "密码")  # 登陆ftp服务器
+            ftp.login("用户名", "密码")  # 登陆ftp服务器，连接的用户名，密码
 
-            def make_zip(source_dir, output_filename):  # 定义打包函数
+            def make_zip(source_dir, output_filename):  # 定义压缩函数，
             zipf = zipfile.ZipFile(output_filename, 'w')
             pre_len = len(os.path.dirname(source_dir))
             for parent, dirnames, filenames in os.walk(source_dir):
+
                 for filename in filenames:
                     pathfile = os.path.join(parent, filename)
                     arcname = pathfile[pre_len:].strip(os.path.sep)
