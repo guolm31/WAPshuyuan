@@ -43,11 +43,8 @@ def isFindTxt(path):  # 查找指定目录，判断是否有文件，有的话�
             fp = open(file_local, 'rb')
             ftp.storbinary('STOR ' + file_remote, fp, bufsize)
             fp.close()
-
             ftp_upload()  # 将文件上传至服务器
-
             ftp.quit()  # 退出ftp服务器
-
             exit()  # 代码结束
 
     time.sleep(60 * 60)
