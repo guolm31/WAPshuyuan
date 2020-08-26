@@ -10,7 +10,7 @@ def isFindTxt(path):  # 查找指定目录，判断是否有文件，有的话�
     while 1:
         if not os.listdir(path):
             print('未收到告警文件,继续定期扫描')
-            time.sleep(60 * 60)
+            #time.sleep(60 * 60)
         else:
             message_table = []
             print('收到告警文件,将读取文件并清空文件夹')
@@ -27,9 +27,10 @@ def isFindTxt(path):  # 查找指定目录，判断是否有文件，有的话�
             #if len(message_table) != 0:
             #sendmessage()  # 调用发送短信函数
             #removeTxt(path)
-
-        return (message_table)
+            return (message_table)
         time.sleep(60 * 60)
+
+
 
 
 def removeTxt(path):
