@@ -3,14 +3,17 @@
 
 import time
 import os
+from readconf import ReadConfig
 
-path = input('请输入文件目录路径')  #r"C:\Users\王少敏\Desktop\python实践\log"
+
 
 def isFindTxt(path):  # 查找指定目录，判断是否有文件，有的话，return table
+    cf = ReadConfig()
+    sleep_time = int(cf.get('interval', 'sleeptime'))   # 设置程序间隔时间
     while 1:
         if not os.listdir(path):
             print('未收到告警文件,继续定期扫描')
-            #time.sleep(60 * 60)
+            #time.sleep(sleep_time)
         else:
             message_table = []
             print('收到告警文件,将读取文件并清空文件夹')
@@ -28,10 +31,7 @@ def isFindTxt(path):  # 查找指定目录，判断是否有文件，有的话�
             #sendmessage()  # 调用发送短信函数
             #removeTxt(path)
             return (message_table)
-        time.sleep(60 * 60)
-
-
-
+        time.sleep(sleep_time)
 
 def removeTxt(path):
     for root, dirs, files in os.walk(path, topdown=False):
@@ -40,4 +40,6 @@ def removeTxt(path):
         for name in dirs:
             os.rmdir(os.path.join(root, name))
 
+
+path = input('请输入文件目录路径')  #r"C:\Users\王少敏\Desktop\python实践\log"
 print(isFindTxt(path))
