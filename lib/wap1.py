@@ -19,7 +19,7 @@ def file_monitor():
     # 设置异常退信息存储路径
     path_error = cf.get('filepath', 'path_error')
     # 设置程序间隔时间
-    sleep_time = int(cf.get('interval', 'sleeptime'))
+    sleep_time = cf.getint('interval', 'sleeptime')
 
     # 循环判断程序
     while True:
