@@ -118,8 +118,8 @@ class SmppSendMSG:
 
 def main(msg,msisdns):
     cfg = {
-        'host' : '10.222.45.24', 'port' : 5016 ,
-        'user' : 'YJDX', 'passwd' : 'YJdx!2'
+        'host' : '1', 'port' :1  ,
+        'user' : '1', 'passwd' : '1'
     }
     logging.error(msg)
     if not (isinstance(msisdns,list) or isinstance(msisdns,set) or isinstance(msisdns,tuple)):
@@ -133,5 +133,5 @@ def main(msg,msisdns):
 if __name__ == "__main__":
     msg_test = ("你好hello123")
     m_list = []
-    m_list.append('18607181232')
+    m_list.append('13000000000')
     main(msg_test,m_list)
