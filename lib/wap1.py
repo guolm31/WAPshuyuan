@@ -20,6 +20,8 @@ def file_monitor():
     path_error = cf.get('filepath', 'path_error')
     # 设置程序间隔时间
     sleep_time = cf.getint('interval', 'sleeptime')
+    # 设置文件告警阈值
+    file_num = cf.getint('filenumber', 'filenum')
 
     # 循环判断程序
     while True:
@@ -34,7 +36,7 @@ def file_monitor():
             # 获取积压文件个数
             num = len(file_names)
             # 判断文件数，并处理
-            if int(num) > 5:
+            if int(num) > file_num:
                 # 获取文件执行时间
                 time_now = datetime.datetime.now()
                 # 设置告警信息
@@ -60,7 +62,7 @@ def file_monitor():
             with open(r'{0}/{1}.txt'.format(path_log, file_break), 'w')as f:
                 for des_phone in des_phones:
                     text_break = '{0},监控程序异常退出,{1},{2}\n'.format(time_break.strftime('%Y-%m-%d %H:%M:%S'), org_phone,
-                                                               des_phone)
+                                                                 des_phone)
                     f.write(text_break)
             # 存储异常信息
             with open(r'{0}/{1}.txt'.format(path_error, 'error' + file_break), 'w')as f:
