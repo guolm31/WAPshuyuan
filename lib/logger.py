@@ -13,7 +13,7 @@ class Logger():
             format='%(asctime)s-%(filename)s[line:%(lineno)d]-%(levelname)s: %(message)s',
             datefmt='%Y-%m-%d %H:%M:%S',
             handlers=[file_handler,console_handler,],
-            level=logging.DEBUG)
+            level=logging.ERROR)
 
 def main():
     mylogger=Logger()
