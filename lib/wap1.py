@@ -59,7 +59,7 @@ def file_monitor():
             time_break = datetime.datetime.now()
             file_break = time_break.strftime('%Y%m%d%H%M%S')
 
-            # 生成监控程序退出告警
+            # 生成监控程序 退出告警
             with open(r'{0}/{1}.txt'.format(path_log, file_break), 'w')as f:
                 for des_phone in des_phones:
                     text_break = '{0},监控程序异常退出,{1},{2}\n'.format(time_break.strftime('%Y-%m-%d %H:%M:%S'), org_phone,

@@ -13,7 +13,7 @@ from readconf import ReadConfig
 
 def isFindTxt():
     cf = ReadConfig()
-    # 设置监控路径
+    # 设置监控 路径
     path_log = cf.get('filepath','path_log')
     # 设置ftp ip
     ftp_ip = cf.get('ftp','ftp_ip')
