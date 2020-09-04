@@ -1,10 +1,13 @@
 #!/usr/bin/python
 # coding=utf-8
 
-import lib.logger as logger
 import logging
+
+import lib.logger as logger
 import lib.smpp as smpp
 from lib.readconf import ReadConfig
+
+
 
 def send(msg):
     logg = logger.Logger()
