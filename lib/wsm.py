@@ -55,5 +55,6 @@ def send(org_phone,msg,des_phone):
     S.sendoneline(org_phone,msg,des_phone,tsleep=0.2)  # 延时根据短信中心每秒限制设定
 
 if __name__ == "__main__":
+    #path=int(cf.get('filepath', 'path_mesaage'))
     path = input('请输入文件目录路径')  #r"C:\Users\王少敏\Desktop\python实践\log"
     print(isFindTxt(path))

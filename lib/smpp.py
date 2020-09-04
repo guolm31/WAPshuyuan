@@ -13,7 +13,7 @@ class SmppSendMSG:
         try:
             self.client = client.Client(host, int(port))
             self.client.connect()
-            #logging.error("IP 端口已连接，开始发送账号密码...")
+            #logging.error("IP 端口已连接，开始发送账号密码......")
             self.client.bind_transceiver(system_id=user, password=passwd)
             #logging.error("连接短信中心成功！")
         except Exception as e:
