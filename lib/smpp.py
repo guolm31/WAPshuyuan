@@ -78,6 +78,41 @@ class SmppSendMSG:
         #logging.error("短信发送完成,用户数%s,发送拆分短信共条数：%s"%(len(msisdnlist),n))
         #logging.error("用时：%s秒，每秒%s条" % (round(time.time() - tt,2), n//(time.time() - tt)))
 
+    def sendoneline(self,org_phone,smscontent,msisdn,tsleep=0):
+        if isinstance(smscontent,str):
+            msg = smscontent
+        else:
+            logging.error("请确保短信消息是UTF8或者UNICODE编码格式")
+            return
+
+        thread = threading.Thread(target=self.client.listen, args=())
+        thread.setDaemon(True)
+        thread.start()
+
+        parts, encoding_flag, msg_type_flag = gsm.make_parts(msg,
+                 encoding=consts.SMPP_ENCODING_ISO10646)
+
+        for part in parts:
+            pdu = self.client.send_message(
+                source_addr_ton=2,
+                source_addr_npi=1,
+                # Make sure it is a byte string, not unicode:
+                source_addr=org_phone,
+                dest_addr_ton=1,
+                dest_addr_npi=1,
+                # Make sure thease two params are byte strings, not unicode:
+                destination_addr=str(msisdn).strip(),
+                short_message=part,
+                data_coding=encoding_flag,
+                esm_class=msg_type_flag,
+                registered_delivery=True,
+                )
+            self.startlist.append([pdu.sequence,pdu.destination_addr])
+            time.sleep(tsleep)
+
+        #logging.error("短信发送完成,用户数%s,发送拆分短信共条数：%s"%(len(msisdnlist),n))
+        #logging.error("用时：%s秒，每秒%s条" % (round(time.time() - tt,2), n//(time.time() - tt)))
+
     def sendsms(self,org_phone,smscontent,msisdnlist,tsleep=0):
         msisdnlist = set(msisdnlist)
         if isinstance(smscontent,str):
