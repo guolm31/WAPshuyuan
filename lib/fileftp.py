@@ -8,7 +8,15 @@ import  ftplib
 from readconf import ReadConfig
 
 
-def FileFtp():
+def FileFtp(ftp_ip,ftp_user,ftp_passwd,ftp_path,path_log):
+    '''
+    此模块用于上传文件到目标服务器
+    :param ftp_ip: 目标服务器IP
+    :param ftp_user: ftp用户名
+    :param ftp_passwd: ftp密码
+    :param ftp_path: 目标服务器存放路径
+    :param path_log: 本地文件保存路径
+    '''
     ftp = ftplib.FTP(ftp_ip)
     ftp.login(ftp_user, ftp_passwd)  # 登陆ftp服务器，连接的用户名，密码
 
@@ -37,5 +45,5 @@ if __name__ == '__main__':
     ftp_passwd = cf.get('ftp','ftp_passwd')
     # 设置ftp 文件保存路径
     ftp_path = cf.get('ftp','ftp_path')
-    FileFtp()
+    FileFtp(ftp_ip,ftp_user,ftp_passwd,ftp_path,path_log)
 
