@@ -2,7 +2,7 @@
 # coding=utf-8
 
 import datetime
-from readconf import ReadConfig
+from lib.readconf import ReadConfig
 
 def FileError(e,path_error,des_phones,org_phone,path_log):
     '''
