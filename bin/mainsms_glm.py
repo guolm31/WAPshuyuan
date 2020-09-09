@@ -4,6 +4,8 @@
 
 import sys
 sys.path.append('../')
+sys.path.append('../lib/')
+sys.path.append('../lib/smpplib/')
 import time
 import os
 from lib.readconfig import ReadConfig
