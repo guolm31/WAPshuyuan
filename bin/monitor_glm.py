@@ -39,7 +39,6 @@ ftp_path = cf.get('ftp','ftp_path')
 
 if __name__ == '__main__':
     mylogger=logger.Logger()
-    logging.error('this is a error from monitor_glm.py')
     while True:
         try:
             #监控目标文件夹,获取文件数量
@@ -49,8 +48,11 @@ if __name__ == '__main__':
                 FileCreat(org_phone,des_phones,path_log,num)
                 # 上传通知文件
                 FileFtp(ftp_ip,ftp_user,ftp_passwd,ftp_path,path_log)
-                logging.error("ftp file success")
+                logging.error("文件积压，已上传告警服务器")
                 # 休眠
+            else:
+                logging.debug('文件未积压,继续定期扫描')
+
         except Exception as e:
             # 生成异常文件，并保存错误日志
             FileError(e,path_error,des_phones,org_phone,path_log)
