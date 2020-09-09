@@ -21,7 +21,7 @@ def FileCreat(org_phone,des_phones,path_log,num):
     # 设置日志文件名时间
     file_error = time_now.strftime('%Y%m%d%H%M%S')
 
-    with open(r'{0}/{1}.txt'.format(path_log, file_error), 'w')as f:
+    with open(r'{0}/{1}.txt'.format(path_log, file_error), 'w',encoding='utf-8')as f:
         for des_phone in des_phones:
             # 设置文本内容
             text = "{0},{1},{2},{3}\n".format(time_now.strftime('%Y-%m-%d %H:%M:%S'), error_text, org_phone,
