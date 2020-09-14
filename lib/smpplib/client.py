@@ -330,7 +330,7 @@ class Client(object):
                 raise
 
     def poll(self, ignore_error_codes=None, auto_send_enquire_link=True):
-        """Act on available PDUs and return"""
+        """Act on available PDUs and return   轮询"""
         while True:
             readable, _writable, _exceptional = select.select([self._socket], [], [], 0)
             if not readable:
@@ -352,8 +352,9 @@ class Client(object):
             destination_addr -- Destination address (string)
             short_message -- Message text (string)
         """
-
+        #构造pdu
         ssm = smpp.make_pdu('submit_sm', client=self, **kwargs)
+        #发送pdu
         self.send_pdu(ssm)
         return ssm
 

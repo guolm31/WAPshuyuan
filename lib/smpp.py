@@ -13,9 +13,9 @@ class SmppSendMSG:
         try:
             self.client = client.Client(host, int(port))
             self.client.connect()
-            #logging.error("IP 端口已连接，开始发送账号密码......")
+            logging.error("IP 端口已连接，开始发送账号密码......")
             self.client.bind_transceiver(system_id=user, password=passwd)
-            #logging.error("连接短信中心成功！")
+            logging.error("连接短信中心成功！")
         except Exception as e:
             logging.error("连接短信中心失败:%s,退出！"%e)
             sys.exit(1)
@@ -85,14 +85,15 @@ class SmppSendMSG:
             logging.error("请确保短信消息是UTF8或者UNICODE编码格式")
             return
 
-        thread = threading.Thread(target=self.client.listen, args=())
-        thread.setDaemon(True)
-        thread.start()
+        #thread = threading.Thread(target=self.client.listen, args=())
+        #thread.setDaemon(True)
+        #thread.start()
 
         parts, encoding_flag, msg_type_flag = gsm.make_parts(msg,
                  encoding=consts.SMPP_ENCODING_ISO10646)
 
         for part in parts:
+            #发送短信send_message
             pdu = self.client.send_message(
                 source_addr_ton=2,
                 source_addr_npi=1,
@@ -107,7 +108,7 @@ class SmppSendMSG:
                 esm_class=msg_type_flag,
                 registered_delivery=True,
                 )
-            self.startlist.append([pdu.sequence,pdu.destination_addr])
+            #self.startlist.append([pdu.sequence,pdu.destination_addr])
             time.sleep(tsleep)
 
         #logging.error("短信发送完成,用户数%s,发送拆分短信共条数：%s"%(len(msisdnlist),n))
@@ -121,9 +122,9 @@ class SmppSendMSG:
             logging.error("请确保短信消息是UTF8或者UNICODE编码格式")
             return
 
-        thread = threading.Thread(target=self.client.listen, args=())
-        thread.setDaemon(True)
-        thread.start()
+        #thread = threading.Thread(target=self.client.listen, args=())
+        #thread.setDaemon(True)
+        #thread.start()
 
         parts, encoding_flag, msg_type_flag = gsm.make_parts(msg,
                  encoding=consts.SMPP_ENCODING_ISO10646)
@@ -149,6 +150,10 @@ class SmppSendMSG:
 
         #logging.error("短信发送完成,用户数%s,发送拆分短信共条数：%s"%(len(msisdnlist),n))
         #logging.error("用时：%s秒，每秒%s条" % (round(time.time() - tt,2), n//(time.time() - tt)))
+
+    def disconnect(self):
+        self.client.unbind()
+        self.client.disconnect()
 
 
 def main(msg,msisdns):

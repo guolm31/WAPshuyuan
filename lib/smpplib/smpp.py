@@ -34,7 +34,7 @@ def make_pdu(command_name, **kwargs):
 
 
 def parse_pdu(data, **kwargs):
-    """Parse binary PDU"""
+    """Parse binary PDU  分析PDU"""
 
     command = pdu.extract_command(data)
 
