@@ -44,13 +44,13 @@ if __name__ == "__main__":
                         logging.error("正在处理文件:"+file)
                         with open(path_read + '/' + file, 'r', encoding='utf-8') as f:
                             lines = f.readlines()
-                            users = []
                             for line in lines:
+                                users = []
                                 for word in line.split(","):
                                     users.append(word)
                                 logging.error("发送短信:  主叫:"+users[2]+" 内容:"+users[1]+" 被叫:"+users[3])
                                 #发送短信
-                                S.sendoneline(users[2],users[1],users[3], tsleep=0.2)
+                                S.sendoneline(users[2],'告警时间：'+users[0]+',设备IP：'+users[1],users[3], tsleep=0.2)
                         logging.error("文件处理完毕，删除"+file)
                         os.remove(path_read + '/' + file)
                 # 等待5秒，短信SOCKET释放
