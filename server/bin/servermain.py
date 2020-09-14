@@ -13,7 +13,7 @@ import lib.smpp as smpp
 import lib.logger as logger
 import logging
 
-cf = ReadConfig('../conf/config_server.ini')
+cf = ReadConfig('../conf/config.ini')
 #smpp参数
 smpp_host = cf.get('smpp', 'host')
 smpp_port = cf.get('smpp', 'port')
@@ -48,9 +48,11 @@ if __name__ == "__main__":
                                 users = []
                                 for word in line.split(","):
                                     users.append(word)
-                                logging.error("发送短信:  主叫:"+users[2]+" 内容:"+users[1]+" 被叫:"+users[3])
+                                # 设置短信内容
+                                sms_text = '告警时间：{0},告警平台：{1},设备IP：{2},告警内容：{3}'.format(users[0],users[5],users[4],users[1])
+                                logging.error("发送短信:  主叫:"+users[2]+" 内容:"+sms_text+" 被叫:"+users[3])
                                 #发送短信
-                                S.sendoneline(users[2],'告警时间：'+users[0]+',设备IP：'+users[1],users[3], tsleep=0.2)
+                                S.sendoneline(users[2],sms_text,users[3], tsleep=0.2)
                         logging.error("文件处理完毕，删除"+file)
                         os.remove(path_read + '/' + file)
                 # 等待5秒，短信SOCKET释放

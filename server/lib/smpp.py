@@ -16,7 +16,7 @@ from lib.readconfig import ReadConfig
 import logger as logger
 
 
-cf = ReadConfig('../conf/config_server.ini')
+cf = ReadConfig('../conf/config.ini')
 #smpp参数
 smpp_host = cf.get('smpp', 'host')
 smpp_port = cf.get('smpp', 'port')
