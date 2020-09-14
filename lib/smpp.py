@@ -8,6 +8,24 @@ import threading
 import logging
 from smpplib import consts, gsm,client
 
+sys.path.append('../')
+sys.path.append('../lib/')
+sys.path.append('../lib/smpplib/')
+
+from lib.readconfig import ReadConfig
+import logger as logger
+
+
+cf = ReadConfig('../conf/config_server.ini')
+#smpp参数
+smpp_host = cf.get('smpp', 'host')
+smpp_port = cf.get('smpp', 'port')
+smpp_user = cf.get('smpp', 'user')
+smpp_passwd = cf.get('smpp', 'passwd')
+
+
+
+
 class SmppSendMSG:
     def __init__(self,host,port,user,passwd):
         try:
@@ -18,7 +36,6 @@ class SmppSendMSG:
             logging.error("连接短信中心成功！")
         except Exception as e:
             logging.error("连接短信中心失败:%s,退出！"%e)
-            sys.exit(1)
 
         self.deliverlist = []
         self.sentlist = []
@@ -156,22 +173,17 @@ class SmppSendMSG:
         self.client.disconnect()
 
 
-def main(msg,msisdns):
-    cfg = {
-        'host' : '1', 'port' :1  ,
-        'user' : '1', 'passwd' : '1'
-    }
-    logging.error(msg)
-    if not (isinstance(msisdns,list) or isinstance(msisdns,set) or isinstance(msisdns,tuple)):
-        logging.error('电话号码表不是list set tuple')
-        sys.exit(1)
-    logging.error("电话号码数%s"%len(msisdns))
-
-    S = SmppSendMSG(cfg['host'], cfg['port'], cfg['user'], cfg['passwd'])
-    S.sendgroup(msg,msisdns,tsleep=0.2)  # 延时根据短信中心每秒限制设定
 
 if __name__ == "__main__":
-    msg_test = ("你好hello123")
-    m_list = []
-    m_list.append('13000000000')
-    main(msg_test,m_list)
+    mylogger=logger.Logger()
+    logging.debug(smpp_host + "  " + smpp_port + "  " + smpp_user + "  " + smpp_passwd)
+    # 初始化smpp连接
+    while True:
+        try:
+            S = SmppSendMSG(smpp_host, smpp_port, smpp_user, smpp_passwd)
+            S.sendoneline('6009', 'test', '18607181232', tsleep=0.2)
+            # 等待5秒，短信SOCKET释放
+            S.disconnect()
+            time.sleep(5)
+        except Exception as e:
+            logging.error("连接短信中心失败-smpp-main:%s,退出！" % e)
