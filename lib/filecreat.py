@@ -6,18 +6,19 @@ import datetime
 import time
 from lib.readconf import ReadConfig
 
-def FileCreat(org_phone,des_phones,path_log,num):
+def FileCreat(org_phone,des_phones,path_log,num,localip):
     '''
     此模块用于生成通知文件
     :param org_phone: 通知短信主叫号码
     :param des_phones: 通知短信被叫号码
     :param path_log: 通知文件存储路径
     :param num: 监控文件数量
+    :param localip:本机ip
     '''
     # 获取文件执行时间
     time_now = datetime.datetime.now()
     # 设置告警信息
-    error_text = '积压文件数量为{0}个'.format(num)
+    error_text = '{0}积压文件数量为{1}个'.format(localip, num)
     # 设置日志文件名时间
     file_error = time_now.strftime('%Y%m%d%H%M%S')
 
