@@ -6,9 +6,10 @@ sys.path.append('../')
 import time
 from lib.filemonitor import FileMonitor
 from lib.filecreat import FileCreat
-from lib.readconfing import ReadConfig
+from lib.readconfig import ReadConfig
 from lib.fileerror import FileError
 from lib.fileftp import FileFtp
+
 
 cf = ReadConfig('config.ini')
 # 获取主叫号码

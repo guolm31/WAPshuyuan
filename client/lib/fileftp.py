@@ -5,7 +5,7 @@
 
 import os
 import  ftplib
-from lib.readconf import ReadConfig
+#from lib.readconf import ReadConfig
 
 
 def FileFtp(ftp_ip,ftp_user,ftp_passwd,ftp_path,path_log):
