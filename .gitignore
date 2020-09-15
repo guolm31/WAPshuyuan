@@ -1,4 +1,7 @@
 .idea/
-conf/
+client/conf/
 doc/
 log/
+server/conf/
+client/log/
+server/log/

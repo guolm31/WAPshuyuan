@@ -13,7 +13,7 @@ import lib.smpp as smpp
 import lib.logger as logger
 import logging
 
-cf = ReadConfig('../conf/config.ini')
+cf = ReadConfig('../conf/config_server.ini')
 #smpp参数
 smpp_host = cf.get('smpp', 'host')
 smpp_port = cf.get('smpp', 'port')

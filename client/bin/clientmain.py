@@ -16,16 +16,20 @@ cf = ReadConfig('config.ini')
 org_phone = cf.get('phonenumber', 'org_phone')
 # 获取被叫号码(存储成列表)
 des_phones = cf.get('phonenumber', 'des_phone').split(',')
+
+# 获取程序间隔时间
+sleep_time = cf.getint('interval', 'sleeptime')
+
 # 获取读取文件数目路径
 path_read = cf.get('filepath', 'path_read')
 # 获取通知日志存储路径
 path_log = cf.get('filepath', 'path_log')
 # 获取异常退信息存储路径
 path_error = cf.get('filepath', 'path_error')
-# 获取程序间隔时间
-sleep_time = cf.getint('interval', 'sleeptime')
+
 # 获取文件告警阈值
 file_num = cf.getint('filenumber', 'filenum')
+
 # 获取ftp ip
 ftp_ip = cf.get('ftp','ftp_ip')
 # 获取ftp 用户
