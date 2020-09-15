@@ -4,7 +4,7 @@
 
 import datetime
 import time
-#from lib.readconf import ReadConfig
+##from lib.readconf import ReadConfig
 
 def FileCreat(org_phone,des_phones,path_log,num,localip,localname):
     '''

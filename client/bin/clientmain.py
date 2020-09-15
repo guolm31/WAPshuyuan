@@ -12,7 +12,7 @@ from lib.fileftp import FileFtp
 
 
 cf = ReadConfig('config.ini')
-# 获取主叫号码
+## 获取主叫号码
 org_phone = cf.get('phonenumber', 'org_phone')
 # 获取被叫号码(存储成列表)
 des_phones = cf.get('phonenumber', 'des_phone').split(',')
