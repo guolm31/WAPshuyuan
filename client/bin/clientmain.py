@@ -3,6 +3,7 @@
 
 import sys
 sys.path.append('../')
+import os
 import time
 from lib.filemonitor import FileMonitor
 from lib.filecreat import FileCreat
@@ -23,9 +24,9 @@ sleep_time = cf.getint('interval', 'sleeptime')
 # 获取读取文件数目路径
 path_read = cf.get('filepath', 'path_read')
 # 获取通知日志存储路径
-path_log = cf.get('filepath', 'path_log')
+path_log = os.path.join(os.path.abspath('..'), 'log','log')
 # 获取异常退信息存储路径
-path_error = cf.get('filepath', 'path_error')
+path_error = os.path.join(os.path.abspath('..'),'log', 'error')
 
 # 获取文件告警阈值
 file_num = cf.getint('filenumber', 'filenum')
