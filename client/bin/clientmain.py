@@ -22,7 +22,7 @@ des_phones = cf.get('phonenumber', 'des_phone').split(',')
 sleep_time = cf.getint('interval', 'sleeptime')
 
 # 获取读取文件数目路径
-path_read = cf.get('filepath', 'path_read')
+path_reads = cf.get('filepath', 'path_read').split(',')
 # 获取通知日志存储路径
 path_log = os.path.join(os.path.abspath('..'), 'log','log')
 # 获取异常退信息存储路径
@@ -47,15 +47,17 @@ local_name = cf.get('localip','local_name')
 if __name__ == '__main__':
     while True:
         try:
-            #监控目标文件夹,获取文件数量
-            num = FileMonitor(path_read)
-            if num > file_num:
-                # 生成通知文件
-                FileCreat(org_phone,des_phones,path_log,num,local_ip,local_name)
-                # 上传通知文件
-                FileFtp(ftp_ip,ftp_user,ftp_passwd,ftp_path,path_log)
-                # 休眠
-                time.sleep(sleep_time)
+            for path_read in path_reads:
+                #监控目标文件夹,获取文件数量
+                num = FileMonitor(path_read)
+                #print(num)
+                if num > file_num:
+                    # 生成通知文件
+                    FileCreat(org_phone,des_phones,path_log,num,local_ip,local_name,path_read)
+                    # 上传通知文件
+                    FileFtp(ftp_ip,ftp_user,ftp_passwd,ftp_path,path_log)
+                    # 休眠
+            time.sleep(sleep_time)
         except Exception as e:
             # 生成异常文件，并保存错误日志
             FileError(e,path_error,des_phones,org_phone,path_log,local_ip)

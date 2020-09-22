@@ -6,7 +6,7 @@ import datetime
 import time
 ##from lib.readconf import ReadConfig
 
-def FileCreat(org_phone,des_phones,path_log,num,localip,localname):
+def FileCreat(org_phone,des_phones,path_log,num,localip,localname,path_read):
     '''
     此模块用于生成通知文件
     :param org_phone: 通知短信主叫号码
@@ -25,8 +25,8 @@ def FileCreat(org_phone,des_phones,path_log,num,localip,localname):
     with open(r'{0}/{1}.txt'.format(path_log, file_error), 'w',encoding='utf-8')as f:
         for des_phone in des_phones:
             # 设置文本内容
-            text = "{0},{1},{2},{3},{4},{5}\n".format(time_now.strftime('%Y-%m-%d %H:%M:%S'), error_text, org_phone,
-                                              des_phone,localip,localname)
+            text = "{0},{1},{2},{3},{4},{5},{6}\n".format(time_now.strftime('%Y-%m-%d %H:%M:%S'), error_text, org_phone,
+                                              des_phone,localip,localname,path_read)
             f.write(text)
 
 if __name__ == '__main__':
